@@ -1,2 +1,2 @@
 # Histogram
-Input comma delimited list of values and draw graph
+Default operation- random graph, or input comma delimited list of values to draw graph
