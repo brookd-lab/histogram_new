@@ -1,6 +1,6 @@
 var canvas = document.getElementById("histogram");
 var ctx = canvas.getContext("2d");
-canvas.width = 500;
+canvas.width = 600;
 canvas.height = 500;
 const length = 9; //number of vertical bars
 
@@ -62,6 +62,8 @@ function labelAxis() {
     //horizontal
     for (let i = 0; i <= 450; i+= 50)
         ctx.fillText(i.toString(), i+40, 475);
+    ctx.fillText("Time (seconds)", 600, 475);
+    ctx.fillText("Volume (ml)", 75, 15);
 }
 
 function drawGraph() {
@@ -85,13 +87,13 @@ function drawGraph() {
     //validate numeric comma delimited list
     var status = true;
     arr.forEach(number => {
-        if (isNaN(number)) {
+        if (isNaN(number) || number > 400) {
             status = false;
             return;
         }
     })
     if (!status) {
-        alert('Please input comma delimited list')
+        alert('Please input comma delimited list (maximum height 400)')
         return;
     }
 
@@ -101,11 +103,33 @@ function drawGraph() {
     drawCustomVerticalBars(arr);
 }
 
+function drawLegend() {
+    let legend = document.querySelector("#legend");
+    console.log(legend);
+    let ul = document.createElement("ul");
+    legend.append(ul);
+    for (let i = 0; i <=1; i++) {
+      let li = document.createElement("li");
+      li.style.listStyle = "none";
+      var color = i % 2 == 0 ? 'salmon' : 'lightgreen'
+      li.style.borderLeft =
+        "20px solid " + color;
+      li.style.padding = "5px";
+      li.textContent = i % 2 == 0 ? "lead" : "iron";
+      ul.append(li);
+    }
+    legend.append(ul);
+  }
+
+
+
+
 drawAxis();
 labelAxis();
 //length number of vertical bars
 let arr = Array.from({length}, () => randomNumberFromInterval(50, 300));
 drawVerticalBars(arr);
+drawLegend();
 
 
  
