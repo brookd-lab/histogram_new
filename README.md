@@ -1,2 +1,2 @@
-# Histogram without third party library
+# Histogram
 Default histogram, to input comma delimited list of values
